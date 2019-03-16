@@ -128,7 +128,6 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "RoundRobbin";
             this.Text = "RoundRobbin";
-            this.Load += new System.EventHandler(this.RoundRobbin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).EndInit();
             this.ResumeLayout(false);
