@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace Sceduling
 {
-    public partial class Form1 : Form
+    public partial class RoundRobbin : Form
     {
-        public Form1()
+        public RoundRobbin()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            RoundRobbin roundRobbin = new RoundRobbin();
-            roundRobbin.Show();
-            this.Hide();
         }
     }
 }
