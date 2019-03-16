@@ -17,6 +17,17 @@ namespace Sceduling
             InitializeComponent();
         }
 
+        int[] RandomSizes(int ArrLength, int maxInt)
+        {
+            int[] arr = new int[ArrLength];
+            Random rnd = new Random(maxInt);
+            for (int i=0; i<ArrLength;i++)
+            {
+                arr[i] = rnd.Next();
+            }
+            return arr;
+        }
+
         private void btnRun_Click(object sender, EventArgs e)
         {
             createScrolleBars(); 
@@ -67,6 +78,11 @@ namespace Sceduling
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             lblThreadSize.Text = trackBar1.Value.ToString();
+        }
+
+        private void RoundRobbin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
