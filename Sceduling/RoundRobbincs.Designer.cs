@@ -120,7 +120,8 @@
             this.Controls.Add(this.lblThreads);
             this.Controls.Add(this.btnRun);
             this.Name = "RoundRobbin";
-            this.Text = "RoundRobbin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Round Robbin";
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown)).EndInit();
             this.ResumeLayout(false);
