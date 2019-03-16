@@ -21,7 +21,13 @@ namespace Sceduling
         {
             RoundRobbin roundRobbin = new RoundRobbin();
             roundRobbin.Show();
-            this.Hide();
+            //this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Priority p = new Priority();
+            p.Show();
         }
     }
 }
