@@ -28,7 +28,7 @@ namespace Sceduling
         {
             Priority p = new Priority();
             p.Show();
-            this.Hide();
+           // this.Hide();
             
         }
 
@@ -36,7 +36,13 @@ namespace Sceduling
         {
             Priority p = new Priority();
             p.Show();
-            this.Hide();
+           // this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Multiple_quess m = new Multiple_quess();
+            m.Show();
         }
     }
 }

@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Multiple_quess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multiple_quess.Designer.cs">
+      <DependentUpon>Multiple_quess.cs</DependentUpon>
+    </Compile>
     <Compile Include="Priority.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multiple_quess.resx">
+      <DependentUpon>Multiple_quess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Priority.resx">
       <DependentUpon>Priority.cs</DependentUpon>
