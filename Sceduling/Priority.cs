@@ -84,12 +84,27 @@ namespace Sceduling
             }
         }
 
+
+        int time = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
+            time++;
             int i = 1;
-            foreach (Control controls in groupBox1.Controls)
+            foreach (Control control in groupBox1.Controls)
             {
 
+
+                var progressBar = control as ProgressBar;
+                if ((progressBar.Name == "Thread" + i.ToString()) && (time <= 5) && (progressBar.Value < arrSize[i - 1]))
+                {
+                    progressBar.Step = 2;
+                    progressBar.PerformStep();
+                    System.Threading.Thread.Sleep(100);
+                }
+                i++;
+                time = 0;
+
+                //timer1.Stop();
             }
         }
     }
