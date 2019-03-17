@@ -36,7 +36,7 @@ namespace Sceduling
             int amountThreads = int.Parse(numUpDown.Value.ToString());
             importance = new int[amountThreads];
 
-            for (int i = 1; i <= amountThreads; i++)
+            for (int i = 0; i < amountThreads; i++)
             {
                 importance[i] = rnd.Next(1, 4);
             }
@@ -84,12 +84,32 @@ namespace Sceduling
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e) // Kyk hier
         {
             int i = 1;
+            int check = 4;
+            bool containsNumber = importance.Contains(check);
             foreach (Control controls in groupBox1.Controls)
             {
-
+                var progressBar = controls as ProgressBar;
+                
+                if (progressBar.Name == "Thread" + i.ToString() && importance[i] == check)
+                {
+                    MessageBox.Show(importance[i].ToString() + " " + MessageBox.Show(importance[i].ToString()));
+                    progressBar.Step = 2;
+                    progressBar.PerformStep();
+                    System.Threading.Thread.Sleep(100);
+                    importance[i] = 0;
+                }
+                if (!containsNumber)
+                {
+                    check--;
+                    containsNumber = importance.Contains(check);
+                }
+                
+                    
+                
+                i++;
             }
         }
     }
