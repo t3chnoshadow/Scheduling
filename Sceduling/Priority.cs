@@ -106,9 +106,6 @@ namespace Sceduling
                     check--;
                     containsNumber = importance.Contains(check);
                 }
-                
-                    
-                
                 i++;
             }
         }
