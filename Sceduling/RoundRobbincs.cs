@@ -12,6 +12,8 @@ namespace Sceduling
 {
     public partial class RoundRobbin : Form
     {
+        int[] arrSize;
+        int time = 0;
         public RoundRobbin()
         {
             InitializeComponent();
@@ -20,20 +22,25 @@ namespace Sceduling
         int[] RandomSizes(int ArrLength, int maxInt)
         {
             int[] arr = new int[ArrLength];
-            Random rnd = new Random(maxInt);
+            Random rnd = new Random();
             for (int i=0; i<ArrLength;i++)
             {
-                arr[i] = rnd.Next();
+                arr[i] = rnd.Next(maxInt);
             }
             return arr;
         }
 
         private void btnRun_Click(object sender, EventArgs e)
         {
-            createScrolleBars(); 
+            createProgressBars();
+            arrSize = new int[int.Parse(numUpDown.Value.ToString())];
+            arrSize = RandomSizes(int.Parse(numUpDown.Value.ToString()), int.Parse(lblThreadSize.Text));
+            timer1.Start();
+
+
         }
 
-        public void createScrolleBars()
+        public void createProgressBars()
         {
             int amount;
             amount = int.Parse(numUpDown.Value.ToString());
@@ -71,7 +78,8 @@ namespace Sceduling
                 
                 
                 threadProgressBar.Visible = true;
-                Controls.Add(threadProgressBar);
+                groupBox1.Controls.Add(threadProgressBar);
+                
             }
         }
 
@@ -81,6 +89,34 @@ namespace Sceduling
         }
 
         private void RoundRobbin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            time++;
+            int i = 1;
+            foreach (Control control in groupBox1.Controls)
+            {
+
+                
+                var progressBar = control as ProgressBar;
+                if ((progressBar.Name == "Thread" + i.ToString()) && (time <=5) && (progressBar.Value < arrSize[i-1]))
+                {
+                    progressBar.Step = 2;
+                    progressBar.PerformStep();
+                    System.Threading.Thread.Sleep(100);
+                }
+                i++;
+                time = 0;
+                
+                //timer1.Stop();
+            }
+            
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }

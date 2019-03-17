@@ -12,6 +12,7 @@ namespace Sceduling
 {
     public partial class Priority : Form
     {
+        int[] importance;
         public Priority()
         {
             InitializeComponent();
@@ -19,22 +20,77 @@ namespace Sceduling
 
         private void tbSize_Scroll(object sender, EventArgs e)
         {
-            lblsize.Text = tbSize.Value.ToString() ;
+            lblThreadSize.Text = tbSize.Value.ToString() ;
         }
         private Random rnd = new Random();
         private void button1_Click(object sender, EventArgs e)
         {
-            ProgressBar bars = new ProgressBar();
-            bars.Width = 100;
-            bars.Height = 20;
-            bars.Location = new System.Drawing.Point(12, 130);
-            bars.Maximum = tbSize.Value;
-            Color randomColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));//https://stackoverflow.com/questions/29198073/get-random-color
-            bars.ForeColor = Color.DeepSkyBlue;
-           
-            bars.Value = bars.Maximum/2;
-            Controls.Add(bars);
+            createProgressBars();
+            priority();
+            timer1.Start();
+        }
 
+        public void priority()
+        {
+            Random rnd = new Random();
+            int amountThreads = int.Parse(numUpDown.Value.ToString());
+            importance = new int[amountThreads];
+
+            for (int i = 1; i <= amountThreads; i++)
+            {
+                importance[i] = rnd.Next(1, 4);
+            }
+        }
+
+        public void createProgressBars()
+        {
+            int amount;
+            amount = int.Parse(numUpDown.Value.ToString());
+
+            for (int i = 1; i <= amount; i++)
+            {
+                ProgressBar threadProgressBar = new ProgressBar();
+                threadProgressBar.Width = 500;
+                threadProgressBar.Height = 50;
+                threadProgressBar.Maximum = int.Parse(lblThreadSize.Text);
+                threadProgressBar.Minimum = 1;
+                threadProgressBar.Name = "Thread" + i.ToString();
+                if (i <= 5)
+                {
+                    if (i == 1)
+                    {
+                        threadProgressBar.Location = new Point(50, 100);
+                    }
+                    else
+                    {
+                        threadProgressBar.Location = new Point(50, 100 * i);
+                    }
+                }
+                else
+                {
+                    if (i == 6)
+                    {
+                        threadProgressBar.Location = new Point(600, 100);
+                    }
+                    else
+                    {
+                        threadProgressBar.Location = new Point(600, 100 * (i - 5));
+                    }
+                }
+
+
+                threadProgressBar.Visible = true;
+                groupBox1.Controls.Add(threadProgressBar);
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int i = 1;
+            foreach (Control controls in groupBox1.Controls)
+            {
+
+            }
         }
     }
 }

@@ -28,6 +28,15 @@ namespace Sceduling
         {
             Priority p = new Priority();
             p.Show();
+            this.Hide();
+            
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            Priority p = new Priority();
+            p.Show();
+            this.Hide();
         }
     }
 }
