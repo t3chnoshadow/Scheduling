@@ -13,6 +13,7 @@ namespace Sceduling
     public partial class Priority : Form
     {
         int[] importance;
+        int[] arrSize;
         public Priority()
         {
             InitializeComponent();
@@ -28,6 +29,18 @@ namespace Sceduling
             createProgressBars();
             priority();
             timer1.Start();
+            arrSize = RandomSizes(int.Parse(numUpDown.Value.ToString()), tbSize.Value);
+        }
+
+        int[] RandomSizes(int ArrLength, int maxInt)
+        {
+            int[] arr = new int[ArrLength];
+            Random rnd = new Random();
+            for (int i = 0; i < ArrLength; i++)
+            {
+                arr[i] = rnd.Next(maxInt);
+            }
+            return arr;
         }
 
         public void priority()
@@ -83,31 +96,68 @@ namespace Sceduling
                 groupBox1.Controls.Add(threadProgressBar);
             }
         }
-
+        int time = 0;
         private void timer1_Tick(object sender, EventArgs e) // Kyk hier
         {
+            /* int i = 1;
+             int check = 4;
+             bool containsNumber = importance.Contains(check);
+             foreach (Control controls in groupBox1.Controls)
+             {
+                 var progressBar = controls as ProgressBar;
+
+                 if (progressBar.Name == "Thread" + i.ToString() && importance[i] == check)
+                 {
+                     MessageBox.Show(importance[i].ToString() + " " + MessageBox.Show(importance[i].ToString()));
+                     progressBar.Step = 2;
+                     progressBar.PerformStep();
+                     System.Threading.Thread.Sleep(100);
+                     importance[i] = 0;
+                 }
+                 if (!containsNumber)
+                 {
+                     check--;
+                     containsNumber = importance.Contains(check);
+                 }
+
+
+
+                 i++;*/
+
+            time++;
             int i = 1;
-            int check = 4;
-            bool containsNumber = importance.Contains(check);
-            foreach (Control controls in groupBox1.Controls)
+            foreach (Control control in groupBox1.Controls)
             {
-                var progressBar = controls as ProgressBar;
-                
-                if (progressBar.Name == "Thread" + i.ToString() && importance[i] == check)
+
+                int max = importance.Max();//https://stackoverflow.com/questions/4906725/largest-and-smallest-number-in-an-array
+                var progressBar = control as ProgressBar;
+                if (max != -1)
                 {
-                    MessageBox.Show(importance[i].ToString() + " " + MessageBox.Show(importance[i].ToString()));
-                    progressBar.Step = 2;
-                    progressBar.PerformStep();
-                    System.Threading.Thread.Sleep(100);
-                    importance[i] = 0;
-                }
-                if (!containsNumber)
+                    
+                    if ((progressBar.Name == "Thread" + i.ToString()) && (time <= 5) && (progressBar.Value < arrSize[i - 1]))
+                    {
+                        if (max == importance[i - 1])
+                        {
+                            progressBar.Step = 2;
+                            progressBar.PerformStep();
+                            System.Threading.Thread.Sleep(100);
+                        }
+                        if (progressBar.Value >= arrSize[i - 1])
+                        {
+                            importance[i - 1] = -1;
+                        }
+                    }
+                    i++;
+                    time = 0;
+                }else
                 {
-                    check--;
-                    containsNumber = importance.Contains(check);
+                    timer1.Stop();
+                    MessageBox.Show("done");
+                    
                 }
-                i++;
+                //timer1.Stop();
             }
         }
+        }
     }
-}
+
